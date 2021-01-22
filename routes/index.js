@@ -1,7 +1,7 @@
+const homepageRouter = require("./homepageRouter");
+
 const initRoutes = (app) => {
-    app.use("/",(req,res)=> {
-        res.send("Welcome to Power-Audit")
-    })
-}
+  app.use("/", homepageRouter);
+};
 
 module.exports = initRoutes;

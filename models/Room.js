@@ -4,6 +4,7 @@ const room = mongoose.Schema({
   roomName: {
     type: String,
     required: true,
+    unique: true,
   },
   appliances: [
     {
