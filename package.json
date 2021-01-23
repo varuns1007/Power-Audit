@@ -22,8 +22,9 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "firebase": "^8.2.4",
     "mongoose": "^5.11.13",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7"
   }
 }

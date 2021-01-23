@@ -6,6 +6,7 @@ const path = require('path')
 const initdb = require("./config/database");
 const initRoutes = require("./routes/index");
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 
 // view engine setup
@@ -15,6 +16,7 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(passport.initialize());
 
 //Session Setup
 app.use(require("express-session")({
