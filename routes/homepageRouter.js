@@ -3,7 +3,7 @@ const router = express.Router();
 const staticController = require("../controllers/staticController");
 
 router.get("/", (req, res) => {
-  res.send("Welcome");
+  res.render("homepage");
 });
 router.post("/createroom", staticController.createRoom);
 router.post("/appliance", staticController.createAppliance);
