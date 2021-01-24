@@ -122,3 +122,32 @@ function showToast(message) {
     document.getElementById("toast").style.display = "none";
   }, 3700);
 }
+
+function addNewAppliance() {
+  applianceName = document.getElementById("applianceName").value;
+  powerConsumption = document.getElementById("powerConsumption").value;
+
+  if (!applianceName.length) {
+    showToast("Please Give a Appliance Name");
+    return;
+  }
+
+  if (!powerConsumption.length) {
+    showToast("Please Give a Power Consumption ");
+    return;
+  }
+
+  let appliance = {
+    name: applianceName,
+    powerConsumption: powerConsumption,
+  };
+
+  axios.post("/addNewAppliance", { appliance }).then((response) => {
+    console.log(response);
+    if (response.data === "Appliance Added") {
+      location.reload();
+    } else if (response.data === "Appliance Already Exist's") {
+      showToast("Room Already Exist's");
+    }
+  });
+}

@@ -23,18 +23,19 @@ module.exports.createRoom = async (req, res) => {
 
 module.exports.createAppliance = async (req, res) => {
   let appliance = new Appliance({
-    name: req.body.name,
-    powerConsumption: req.body.powerConsumption,
+    name: req.body.appliance.name,
+    powerConsumption: req.body.appliance.powerConsumption,
   });
 
   await appliance.save((err, result) => {
     if (err) {
       if (err.code === 11000) {
-        res.send("Item Already Exist's");
+        res.send("Appliance Already Exist's");
       } else {
         res.send(err);
       }
     } else {
+      console.log(result);
       res.send("Appliance Added");
     }
   });

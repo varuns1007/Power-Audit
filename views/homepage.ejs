@@ -34,20 +34,30 @@
     </nav>
   </body>
 
-  <!-- Button trigger modal -->
+  <!-- Add rooom Button trigger modal -->
   <button
     type="button"
     class="btn btn-primary"
     data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
+    data-bs-target="#addNewRoomModal"
   >
-    Launch demo modal
+    Add rooom
+  </button>
+  
+  <!-- Add appliance Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#addNewApplianceModal"
+  >
+    Add Appliance
   </button>
 
-  <!-- Modal -->
+  <!-- Add New Room Modal -->
   <div
     class="modal fade"
-    id="exampleModal"
+    id="addNewRoomModal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -76,7 +86,6 @@
                 placeholder="BEE Lab"
                 required
               />
-              <div class="valid-feedback">Looks good!</div>
             </div>
             <!-- Select Appliances -->
             <h6 class="mb-0">Add Appliance's</h6>
@@ -163,6 +172,70 @@
               <button class="btn btn-primary" onclick="addRoom()">Add Room</button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Add New Appliance -->
+  <div
+    class="modal fade"
+    id="addNewApplianceModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Room</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form action="" class="row g-3">
+
+          <div class="col-12">
+            <label for="roomName" class="form-label"
+              >Appliance name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="applianceName"
+              placeholder="BEE Lab"
+              required
+            />
+          </div>
+
+          <div class="col-12">
+            <label for="powerConsumption" class="form-label"
+              >Power Consumption</label
+            >
+            <div class="input-group has-validation">
+              <input
+                type="text"
+                class="form-control"
+                id="powerConsumption"
+                aria-describedby="inputGroupPrepend"
+               required                
+              />
+
+              <span class="input-group-text" id="inputGroupPrepend"
+                >kWh</span
+              >
+            </div>
+          </div>
+
+          <div class="col-12 text-end">
+            <button class="btn btn-primary" onclick="addNewAppliance()">Add Room</button>
+          </div>
+        </form>
+
         </div>
       </div>
     </div>

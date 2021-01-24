@@ -30,7 +30,7 @@ router.get(
 router.get("/logout", authController.logout);
 
 router.post("/createroom", staticController.createRoom);
-router.post("/appliance", staticController.createAppliance);
+router.post("/addNewAppliance", staticController.createAppliance);
 
 router.get("/appliancelist", staticController.getApplianceList);
 
