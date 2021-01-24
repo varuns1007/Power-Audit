@@ -7,7 +7,7 @@ const authController = require('../controllers/authController');
 
 router.get("/", (req, res) => {
   // console.log(req.session)
-  res.render("signIn");
+  res.render("landingPage");
 });
 
 router.get('/signin/google', passport.authenticate('google', { scope:['https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email']}));
