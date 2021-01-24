@@ -1,27 +1,27 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
 }
 
 a {
-    text-decoration: none !important;
-    color: white !important;
+  text-decoration: none !important;
+  color: white !important;
 }
 
 /* navbar */
-.navbar{
-  background: #97BC62;
+.navbar {
+  background: #97bc62;
   transition: all 0.3s ease-in-out;
 }
 
-.navbar-brand{
+.navbar-brand {
   margin-right: 0.5em;
 }
 
-.nav-link-btn{
-  background-color: #27AB74;
+.nav-link-btn {
+  background-color: #27ab74;
   border-radius: 70px;
   letter-spacing: 1px;
   padding: 0.2em 1.2em;
@@ -37,135 +37,148 @@ a {
   margin-right: 0.5em;
 }
 
-nav li > a:after{
-    content: '';
-    display: block;
-    height: 1.5px;
-    background: #27AB74;
-    transform: scaleX(0);
-    transition: transform .3s;
+nav li > a:after {
+  content: "";
+  display: block;
+  height: 1.5px;
+  background: #27ab74;
+  transform: scaleX(0);
+  transition: transform 0.3s;
 }
-nav li > a:hover:after{
-    transform: scaleX(1);
-    transition: transform .3s;
+nav li > a:hover:after {
+  transform: scaleX(1);
+  transition: transform 0.3s;
 }
 
 /* hero-section */
-.hero-section{
-    background-color: #97BC62;
-    height: 13em;
+.hero-section {
+  background-color: #97bc62;
+  height: 13em;
 }
-.hero-title{
-    position: relative;
-    top: 42%;
-    font-weight: 700;
-    color: #ffffff;
-    font-size: 1.8em;
-    
+.hero-title {
+  position: relative;
+  top: 42%;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1.8em;
 }
-.hero-subtitle{
-    position: relative;
-    top: 49%;
-    font-weight: 600;
-    font-size: 1.8em;
+.hero-subtitle {
+  position: relative;
+  top: 49%;
+  font-weight: 600;
+  font-size: 1.8em;
 }
-.bulb-svg{
+.bulb-svg {
   position: relative;
   width: 5em;
   top: 41%;
-  
 }
 
 /* Dashboard */
-.dashboard-title{
+.dashboard-title {
   margin-top: 1em;
   margin-bottom: 1em;
   position: relative;
   font-weight: 600;
   font-size: 1.2em;
 }
-.dashboard-title::after{
-  content: '';
+.dashboard-title::after {
+  content: "";
   position: absolute;
   display: inline-block;
   top: 1.2em;
   width: 5.8em;
   height: 2px;
   transform: translateX(-98%);
-  background-color: #27AB74;
+  background-color: #27ab74;
 }
-.dashboard-subtitle{
+.dashboard-subtitle {
   position: relative;
   font-weight: 500;
   font-size: 1.2em;
 }
-.card{
-  border:3px solid rgba(0,0,0,.125) !important;
+.card {
+  border: 3px solid rgba(0, 0, 0, 0.125) !important;
 }
 
 /* footer */
-footer{
+footer {
   position: relative;
-  background-color: #27AB74;
+  background-color: #27ab74;
   height: 3em;
   margin-top: 2em;
 }
 
-.copyright{
+.copyright {
   color: #ffffff;
 }
 
-.contact-links{
+.contact-links {
   position: absolute;
   cursor: pointer;
 }
 
-.contact-icon{
+.contact-icon {
   float: right;
   padding-left: 1em;
   font-size: 1.3em;
 }
 
+/* Modal */
+.appliance {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.selectedAppliances {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid #d7d7d7;
+  max-height: 20rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 /* Media */
-@media (min-width:429px){
-  .hero-title{
+@media (min-width: 429px) {
+  .hero-title {
     font-size: 2.5em;
   }
-  .bulb-svg{
+  .bulb-svg {
     width: 6em;
     top: 33%;
   }
 }
 @media (min-width: 768px) {
-  .hero-section{
+  .hero-section {
     height: 15em;
   }
-  .hero-title{
+  .hero-title {
     font-size: 3em;
     left: 7%;
   }
-  .hero-subtitle{
+  .hero-subtitle {
     left: 8%;
     font-size: 2.2em;
   }
-  .bulb-svg{
+  .bulb-svg {
     top: 27%;
     width: 7em;
   }
-  .rooms-container{
-  top: 59%;
+  .rooms-container {
+    top: 59%;
+  }
 }
-}
-@media (min-width:1200px){
-  .hero-title{
+@media (min-width: 1200px) {
+  .hero-title {
     font-size: 4em;
     top: 19%;
   }
-  .hero-subtitle{
+  .hero-subtitle {
     top: 21%;
   }
   .rooms-container {
     top: 60%;
     left: 7%;
-}
+  }
 }
