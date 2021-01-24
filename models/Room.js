@@ -6,17 +6,20 @@ const room = mongoose.Schema({
     required: true,
     unique: true,
   },
+
   appliances: [
     {
-      appliance: {
-        details: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Appliance",
-        },
-        count: {
-          type: String,
-          required: true,
-        },
+      details: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Appliance",
+      },
+      count: {
+        type: String,
+        required: true,
+      },
+      hoursUsed: {
+        type: String,
+        required: true,
       },
     },
   ],

@@ -3,14 +3,15 @@ const Appliance = require("../models/Appliance");
 
 module.exports.createRoom = async (req, res) => {
   let room = new Room({
-    roomName: req.body.roomName,
-    appliances: req.body.appliances,
+    roomName: req.body.room.roomName,
+    appliances: req.body.room.appliances,
   });
 
   await room.save((err, result) => {
     if (err) {
+      console.log(err);
       if (err.code === 11000) {
-        res.send("Item Already Exist's");
+        res.send("Room Already Exist's");
       } else {
         res.send(err);
       }
@@ -37,4 +38,14 @@ module.exports.createAppliance = async (req, res) => {
       res.send("Appliance Added");
     }
   });
+};
+
+module.exports.getApplianceList = async (req, res) => {
+  await Appliance.find({})
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

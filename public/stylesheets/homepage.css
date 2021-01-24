@@ -1,0 +1,13 @@
+.appliance {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.selectedAppliances {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid #d7d7d7;
+  max-height: 20rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
