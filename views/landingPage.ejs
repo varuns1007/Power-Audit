@@ -123,41 +123,9 @@
         <div class="rooms-container">
           <div class="container">
             <div
-              class="row justify-content-center row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4"
-            >
-              <% for(i=0;i<=8;i++){ %>
-              <div class="col">
-                <div
-                  class="card border-success mb-3 h-100"
-                  style="max-width: 18rem"
-                >
-                  <div class="card-body text-success">
-                    <h5 class="card-title align-middle">Success card title</h5>
-                  </div>
-                  <div class="card-footer">
-                    <div
-                      class="info-icon float-start"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
-                      title="Power usage of the Room"
-                      style="cursor: pointer"
-                    >
-                      <span class="material-icons"> info </span>
-                    </div>
-                    <div
-                      class="edit-icon float-end"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
-                      title="Add Appliance"
-                      style="cursor: pointer"
-                    >
-                      <span class="material-icons"> create </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <% } %>
-            </div>
+              class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4"
+              id="roomsContainer"
+            ></div>
           </div>
         </div>
       </div>
@@ -165,24 +133,24 @@
 
     <footer>
       <div class="container">
-        <div class="row justify-content-end">
-          <div class="col-4">
-            <p class="text-center copyright pt-1">
+        <div class="row no-gutters py-2">
+          <div class="col-12 d-flex justify-content-center">
+            <span class="text-center copyright pt-1">
               © 2021 Copyright : Green House
-            </p>
+            </span>
           </div>
-          <div class="col-4">
+          <div class="col-12 d-flex justify-content-center mt-2">
             <div class="contact-links">
-              <a href="#youtube"
+              <a class="mx-3" href="#youtube"
                 ><i class="contact-icon bi bi-youtube" style="color: red"></i
               ></a>
-              <a href="#instagram"
+              <a class="mx-3" href="#instagram"
                 ><i
                   class="contact-icon bi bi-instagram"
                   style="color: purple"
                 ></i
               ></a>
-              <a href="#facebook"
+              <a class="mx-3" href="#facebook"
                 ><i class="contact-icon bi bi-facebook" style="color: blue"></i
               ></a>
             </div>
@@ -240,7 +208,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-md-6 col-6">
+                  <div class="col-lg-6 col-md-6 col-12">
                     <label for="quantityInput" class="form-label"
                       >Quantity</label
                     >
@@ -254,7 +222,7 @@
                     />
                   </div>
 
-                  <div class="col-lg-6 col-md-6 col-6">
+                  <div class="col-lg-6 col-md-6 col-12">
                     <label for="hoursUsed" class="form-label"
                       >Hour's Used/week</label
                     >
@@ -273,7 +241,7 @@
                       >
                     </div>
                   </div>
-                  <div class="col-lg-6 col-md-6 col-6">
+                  <div class="col-lg-6 col-md-6 col-12">
                     <label for="powerInput" class="form-label"
                       >Power Consumption</label
                     >

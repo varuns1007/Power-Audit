@@ -1,6 +1,7 @@
 let appliancesList = [];
 let addedAppliances = [];
 window.onload = function () {
+  getRooms();
   getApplianceList();
 };
 
@@ -8,7 +9,7 @@ function getApplianceList() {
   axios.get("/appliancelist").then((response) => {
     if (response.data) {
       appliancesList = response.data;
-      console.log(appliancesList);
+      // console.log(appliancesList);
       let applianceInput = document.getElementById("applianceInput");
       appliancesList.forEach((appliance) => {
         let option = document.createElement("option");
@@ -158,3 +159,67 @@ var tooltipTriggerList = [].slice.call(
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl);
 });
+
+function getRooms() {
+  axios.get("/getroomslist").then((response) => {
+    // console.log(response);
+    let roomsContainer = document.getElementById("roomsContainer");
+    response.data.forEach((room) => {
+      let roomDiv = document.createElement("div");
+      roomDiv.className = "col";
+      roomDiv.innerHTML = `
+                <div
+                  class="card border-success mb-3 h-100"
+                  style="max-width: 18rem"
+                >
+                  <div class="card-body text-success">
+                    <h5 class="card-title align-middle">${room.roomName}</h5>
+                  </div>
+                  <div class="card-footer d-flex justify-content-between">
+                    <div
+                      class="info-icon "
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Power usage of the Room"
+                      style="cursor: pointer"
+                    >
+                      <span class="material-icons"> info </span>
+                    </div>
+                    <div
+                      class="edit-icon "
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Add Appliance"
+                      style="cursor: pointer"
+                    >
+                      <span class="material-icons"> create </span>
+                    </div>
+                    <div
+                    class="edit-icon "
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Delete Room"
+                    style="cursor: pointer"
+                    onclick=deleteRoom('${room._id}')
+                  >
+                    <span class="material-icons"> delete </span>
+                  </div>
+                  </div>
+                </div>
+              `;
+      roomsContainer.appendChild(roomDiv);
+    });
+  });
+}
+
+function deleteRoom(roomId) {
+  debugger;
+  axios.post("/deleteroom", { roomId }).then((response) => {
+    if (response.data === "Room Deleted") {
+      showToast("Room Deleted successfully");
+      setTimeout(function () {
+        location.reload();
+      }, 3500);
+    }
+  });
+}

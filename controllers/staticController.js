@@ -50,3 +50,27 @@ module.exports.getApplianceList = async (req, res) => {
       console.log(err);
     });
 };
+
+module.exports.getRoomsList = async (req, res) => {
+  await Room.find({})
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(result);
+      console.log(err);
+    });
+};
+
+module.exports.deleteRoom = async (req, res) => {
+  console.log(req.body.roomId);
+  await Room.findOneAndDelete({ _id: req.body.roomId })
+    .then((result) => {
+      console.log(result);
+      res.send("Room Deleted");
+    })
+    .catch((err) => {
+      res.send(result);
+      console.log(err);
+    });
+};

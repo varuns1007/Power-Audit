@@ -34,4 +34,8 @@ router.post("/addNewAppliance", staticController.createAppliance);
 
 router.get("/appliancelist", staticController.getApplianceList);
 
+router.get("/getroomslist", staticController.getRoomsList);
+
+router.post("/deleteroom", staticController.deleteRoom);
+
 module.exports = router;

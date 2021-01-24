@@ -105,7 +105,7 @@ nav li > a:hover:after {
 footer {
   position: relative;
   background-color: #27ab74;
-  height: 3em;
+  /* height: 5em; */
   margin-top: 2em;
 }
 
@@ -114,13 +114,10 @@ footer {
 }
 
 .contact-links {
-  position: absolute;
   cursor: pointer;
 }
 
 .contact-icon {
-  float: right;
-  padding-left: 1em;
   font-size: 1.3em;
 }
 
