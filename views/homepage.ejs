@@ -10,7 +10,7 @@
   </head>
   <body>
 <!-- Toast -->
-    <div class="toast bg-secondary px-4" style="position: absolute; top: 20px; right: 10px;z-index: 1051;width: fit-content;font-size:1.1rem" id="toast">
+    <div class="toast bg-secondary px-4" style="display: none;position: absolute; top: 20px; right: 10px;z-index: 1051;width: fit-content;font-size:1.1rem;transition: 0.7s;" id="toast">
       <div class="toast-body text-light" id="toastMessage">
         Hello, world! This is a toast message.
       </div>
@@ -94,7 +94,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4 col-md-4 col-6">
                   <label for="quantityInput" class="form-label"
                     >Quantity</label
                   >
@@ -108,9 +108,9 @@
                   />
                 </div>
                 
-                <div class="col-4">
+                <div class="col-lg-4 col-md-4 col-6">
                   <label for="hoursUsed" class="form-label"
-                    >Hour's Used</label
+                    >Hour's Used/week</label
                   >
                   <div class="input-group has-validation">
                     <input
@@ -127,7 +127,7 @@
                     >
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4 col-md-4 col-6">
                   <label for="powerInput" class="form-label"
                     >Power Consumption</label
                   >

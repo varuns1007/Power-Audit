@@ -54,21 +54,21 @@ function addAppliance() {
     applianceDiv.className = "appliance row no-gutters";
     applianceDiv.innerHTML = `
     <h6>${applianceName}</h6>
-    <div class="col-4">
+    <div class="col-lg-4 col-12">
       <label for="applianceInput" class="form-label">
         Quantity
       </label>
       :-
       <span>${quantity}</</span>
     </div>
-    <div class="col-8">
+    <div class="col-lg-8 col-12">
       <label for="applianceInput" class="form-label">
         Power Consumption
       </label>
       :-
       <span>${power}</span> kwH
     </div>
-    <div class="col-8">
+    <div class="col-lg-8 col-12">
       <label for="applianceInput" class="form-label">
         Hour's Used/week
       </label>
@@ -112,9 +112,13 @@ function addRoom() {
 }
 
 function showToast(message) {
+  document.getElementById("toast").style.display = "block";
   document.getElementById("toastMessage").innerHTML = message;
   document.getElementById("toast").style.opacity = "1";
   setTimeout(function () {
     document.getElementById("toast").style.opacity = "0";
   }, 3000);
+  setTimeout(function () {
+    document.getElementById("toast").style.display = "none";
+  }, 3700);
 }
