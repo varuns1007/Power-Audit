@@ -37,6 +37,12 @@ initdb();
 //Initialize routes
 initRoutes(app);
 
+//Locals
+app.use(function(req, res, next) {
+    res.locals.user = req.session.user;
+    next();
+});
+
 //404 handler and pass to error handler
 app.use((req,res,next) => {
     next(createError(404,'Not Found'));

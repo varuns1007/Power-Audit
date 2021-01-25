@@ -1,6 +1,7 @@
 const Room = require("../models/Room");
 const Appliance = require("../models/Appliance");
 const Data = require("../models/Data");
+var schedule = require('node-schedule');
 
 module.exports.createRoom = async (req, res) => {
   let room = new Room({
@@ -55,9 +56,13 @@ module.exports.getApplianceList = async (req, res) => {
 module.exports.getRoomsList = async (req, res) => {
   console.log(req.params.filter);
   if(req.params.filter === 'all'){
-    await Room.find({})
+    await Room.find({}).populate({
+      path:'appliances',
+      populate: {
+        path:'details'
+      }
+    })
       .then((result) => {
-        
         res.send(result);
       })
       .catch((err) => {
@@ -83,6 +88,19 @@ module.exports.deleteRoom = async (req, res) => {
     .then((result) => {
       console.log(result);
       res.send("Room Deleted");
+    })
+    .catch((err) => {
+      res.send(result);
+      console.log(err);
+    });
+};
+
+module.exports.deleteAppliance = async (req, res) => {
+  console.log(req.body.applianceId);
+  await Appliance.findOneAndDelete({ _id: req.body.applianceId })
+    .then((result) => {
+      console.log(result);
+      res.send("Appliance Deleted");
     })
     .catch((err) => {
       res.send(result);
@@ -126,7 +144,37 @@ module.exports.weeklyreportPage = async (req, res) => {
     });
 };
 
-module.exports.createWeeklyReport = async (req, res) => {
+
+module.exports.getRoom = async(req,res) => {
+  let roomId = req.params.roomId;
+  await Room.findOne({_id: roomId}).populate({
+    path: 'appliances',
+    populate: {
+      path: 'details'
+    }
+  })
+    .then((result)=> {
+      // console.log(result)
+      res.send(result)
+    })
+    .catch((err)=> {
+      // console.log(err);
+      res.send(err)
+    })
+}
+
+// module.exports.search = async (req,res) => {
+//   let query = req.query.text;
+//   await Room.find({ $text: { $search: query } })
+//   .then((result)=>{
+//     res.send(result);
+//   })
+//   .catch((err)=>{
+//     res.send(err);
+//   })
+// }
+
+async function createWeeklyReport(){
   let rooms = await Room.find({});
   // console.log(rooms);
   
@@ -144,4 +192,9 @@ module.exports.createWeeklyReport = async (req, res) => {
   }).catch((err)=>{
     console.log(err);
   });
-};
+}
+
+var j = schedule.scheduleJob({hour: 11, minute: 16, dayOfWeek: 1}, function(){
+  createWeeklyReport()
+  console.log('Weekly Report Saved');
+});

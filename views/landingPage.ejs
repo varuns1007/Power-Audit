@@ -18,7 +18,7 @@
       class="toast bg-secondary px-4"
       style="
         display: none;
-        position: absolute;
+        position: fixed;
         top: 20px;
         right: 10px;
         z-index: 1051;
@@ -158,8 +158,8 @@
           </div>
 
           <!-- -----Appliances Division------ -->
-          <div class="tab-pane fade show " id="appliancesDivision" role="tabpanel" aria-labelledby="pills-home-tab">
-            hello
+          <div class="tab-pane fade show row no-gutters" style="display:flex" id="appliancesDivision" role="tabpanel" aria-labelledby="pills-home-tab">
+                
           </div>
           
         </div>
@@ -223,7 +223,7 @@
                   type="text"
                   class="form-control"
                   id="roomName"
-                  placeholder="BEE Lab"
+                  placeholder="Room Name"
                   required
                 />
               </div>
@@ -292,7 +292,7 @@
                       />
 
                       <span class="input-group-text" id="inputGroupPrepend"
-                        >kWh</span
+                        >kW</span
                       >
                     </div>
                   </div>
@@ -331,7 +331,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add New Room</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add New Appliance</h5>
             <button
               type="button"
               class="btn-close"
@@ -366,17 +366,38 @@
                   />
 
                   <span class="input-group-text" id="inputGroupPrepend"
-                    >kWh</span
+                    >kW</span
                   >
                 </div>
               </div>
 
               <div class="col-12 text-end">
                 <button class="btn btn-primary" onclick="addNewAppliance()">
-                  Add Room
+                  Add Appliance
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Info Model -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalHeader"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div id="displayAppliances">
+
+            </div>
           </div>
         </div>
       </div>
