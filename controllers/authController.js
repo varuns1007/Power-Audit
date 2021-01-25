@@ -22,8 +22,6 @@ module.exports.authRedirect = async (req,res)=>{
         res.send('logged in');
     }
   });
-  
-  
 }
 
 module.exports.logout = (req,res)=>{

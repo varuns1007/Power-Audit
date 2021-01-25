@@ -8,7 +8,14 @@ const Room = require("../models/Room");
 const Appliance = require("../models/Appliance");
 const { static } = require("express");
 
-router.get("/", async(req, res) => {
+router.get(
+  "/",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  authController.authRedirect
+);
+
+
+router.get("/homepage", async(req, res) => {
   // res.render("homepage");
   // console.log(req.session)
   let rooms;
@@ -33,11 +40,6 @@ router.get(
   })
 );
 
-router.get(
-  "/",
-  passport.authenticate("google", { failureRedirect: "/" }),
-  authController.authRedirect
-);
 
 router.get("/weeklyreport", staticController.weeklyreportPage);
 

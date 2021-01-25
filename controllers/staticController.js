@@ -109,18 +109,17 @@ module.exports.deleteAppliance = async (req, res) => {
 };
 
 module.exports.weeklyreportPage = async (req, res) => {
-  await Data.find({})
-    .populate({
-      path: "rooms",
+  await Data.find({}).populate({
+    path: "rooms",
+    populate: {
+      path: "appliances",
       populate: {
-        path: "appliances",
-        populate: {
-          path: "details",
-        },
+        path: "details",
       },
-    })
+    },
+  })
     .then((result) => {
-      // console.log(result);
+      console.log(result);
       // Week
       result.forEach((week) => {
         // Rooms
@@ -194,7 +193,7 @@ async function createWeeklyReport(){
   });
 }
 
-var j = schedule.scheduleJob({hour: 11, minute: 16, dayOfWeek: 1}, function(){
+var j = schedule.scheduleJob({hour: 14, minute: 14, dayOfWeek: 1}, function(){
   createWeeklyReport()
   console.log('Weekly Report Saved');
 });

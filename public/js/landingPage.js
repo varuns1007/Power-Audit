@@ -271,7 +271,12 @@ function deleteAppliance(applianceId) {
 
 function searchRoom() {
   filter = document.getElementById("searchRoomInput").value;
-  getRooms(filter);
+  if(filter.length){
+    getRooms(filter);
+  } else{
+    getRooms('all');
+
+  }
 }
 
 function showInfo(roomId) {

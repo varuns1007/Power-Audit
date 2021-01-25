@@ -64,3 +64,25 @@ nav li > a:hover:after {
   text-align: center;
   /* padding: 0.5rem 0; */
 }
+
+.dashboard-title {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  position: relative;
+  font-weight: 600;
+  font-size: 1.4em;
+}
+.dashboard-title::after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: 1.2em;
+  width: 5.8em;
+  height: 2px;
+  transform: translateX(-110%);
+  background-color: #27ab74;
+}
+
+.accordion-button::after{
+  background-image:none !important;
+}
