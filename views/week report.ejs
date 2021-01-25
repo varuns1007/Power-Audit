@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeeklyReport</title>
+    <%- include('./imports') -%>
+    <link rel="stylesheet" href="/stylesheets/week report.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="#"></a> -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link navbar-link active" aria-current="page" href="/"
+                >DashBoard</a
+              >
+            </li>
+          </ul>
+          <span class="login">
+            <% if(user){ %>
+            <a
+              href="/logout"
+              class="nav-link-btn"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              >Logout</a
+            >
+            <% }else{ %>
+            <a href="/signin/google" class="nav-link-btn">Sign In</a>
+            <% } %>
+          </span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container row no-gutters mt-5">
+      <div class="d-flex align-items-start">
+        <div class="col-3">
+          <div
+            class="nav flex-column nav-pills me-3"
+            id="v-pills-tab"
+            role="tablist"
+            aria-orientation="vertical"
+          >
+            <% data.forEach(week =>{ %>
+            <a
+              class="nav-link text-center tabs "
+              id="v-pills-home-tab"
+              data-bs-toggle="pill"
+              href='#week-<%=week.weekNo%>''
+              role="tab" aria-controls="v-pills-home" aria-selected="true"
+              >Week <%= week.weekNo %></a
+            >
+            <% }) %>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="tab-content p-3" id="v-pills-tabContent">
+            <% data.forEach(week =>{ %>
+
+            <div
+              class="tab-pane fade show "
+              role="tabpanel"
+              id='week-<%=week.weekNo%>'
+            >
+              <div class="accordion" id="accordionExample">
+                <% week.rooms.forEach(room=>{%>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="Heading-#week-<%=week.weekNo%>-<%= room.roomName%>">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#week-<%=week.weekNo%>-<%= room.roomName%>"
+                      aria-expanded="false"
+                      aria-controls="week-<%=week.weekNo%>-<%= room.roomName%>"
+                    >
+                      <%=room.roomName%>
+                    </button>
+                  </h2>
+                  <div
+                    id="week-<%=week.weekNo%>-<%= room.roomName%>"
+                    class="accordion-collapse collapse show"
+                    aria-labelledby="Heading-#week-<%=week.weekNo%>-<%= room.roomName%>"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">
+                        <h6>Total Appliances:- <%=room.appliances.length%></h6>
+                        <h6>Total Power Consumption:- <%=room.totalPowerConsumption%></h6>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+
+              </div>
+            </div>
+            <% }) %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/week report.js"></script>
+  </body>
+</html>

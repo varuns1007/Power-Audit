@@ -80,7 +80,7 @@ nav li > a:hover:after {
   margin-bottom: 1em;
   position: relative;
   font-weight: 600;
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 .dashboard-title::after {
   content: "";
@@ -100,6 +100,18 @@ nav li > a:hover:after {
 .card {
   border: 3px solid rgba(0, 0, 0, 0.125) !important;
 }
+
+.dashboard-tabs.active{
+  color: #fff !important;
+  background: #27ab74 !important;
+}
+
+.dashboard-tabs{
+  color: #000 !important;
+  border:1px solid #27ab74;
+  margin-right: 3rem;
+}
+
 
 /* footer */
 footer {

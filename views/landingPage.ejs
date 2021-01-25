@@ -67,6 +67,15 @@
                   >Add Room</a
                 >
               </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#addNewApplianceModal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addNewApplianceModal"
+                  >Add New Appliance</a
+                >
+              </li>
             </ul>
             <span class="login">
               <% if(user){ %>
@@ -103,31 +112,59 @@
     <div class="dashboard">
       <div class="container">
         <h6 class="dashboard-title text-center">DashBoard</h6>
-        <form class="row no-gutters mb-4 mt-4 col-12 g-2">
-          <div class="col-lg-8 col-md-8">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </div>
-          <div class="col-lg-4 col-md-4 col-2 mr-4">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </div>
-        </form>
-        <h6 class="dashboard-subtitle">Rooms</h6>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="dashboard-tabs nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#roomsDivision" role="tab" aria-controls="pills-home" aria-selected="true">Rooms</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="dashboard-tabs nav-link" id="pills-home-tab" data-bs-toggle="pill" href="#appliancesDivision" role="tab" aria-controls="pills-home" aria-selected="true">Appliances</a>
+          </li>
+          
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <!-- -----Rooms Division------ -->
+          <div class="tab-pane fade show active" id="roomsDivision" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="row no-gutters mb-4 mt-4 col-12 g-2">
+              <div class="col-lg-8 col-md-8">
+                <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  id="searchRoomInput"
+                  list="roomsList"
+                />
+                <datalist id="roomsList">
+                  <!-- <option>Bee Lab</option> -->
+                  </datalist>
+              </div>
+              <div class="col-lg-4 col-md-4 col-2 mr-4">
+                <button class="btn btn-outline-success my-2 my-sm-0" onclick="searchRoom()">
+                  Search
+                </button>
+              </div>
+            </div>
+            <h6 class="dashboard-subtitle">Rooms</h6>
+    
+            <div class="rooms-container">
+              <div class="container">
+                <div
+                  class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4"
+                  id="roomsContainer"
+                ></div>
+              </div>
+            </div>
 
-        <div class="rooms-container">
-          <div class="container">
-            <div
-              class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4"
-              id="roomsContainer"
-            ></div>
           </div>
+
+          <!-- -----Appliances Division------ -->
+          <div class="tab-pane fade show " id="appliancesDivision" role="tabpanel" aria-labelledby="pills-home-tab">
+            hello
+          </div>
+          
         </div>
+
+        
       </div>
     </div>
 
@@ -179,7 +216,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form class="row g-3 needs-validation" novalidate>
+            <div class="row g-3 needs-validation" novalidate>
               <div class="col-12">
                 <label for="roomName" class="form-label">Room name</label>
                 <input
@@ -277,7 +314,7 @@
                   Add Room
                 </button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

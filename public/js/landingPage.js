@@ -1,7 +1,7 @@
 let appliancesList = [];
 let addedAppliances = [];
 window.onload = function () {
-  getRooms();
+  getRooms('all');
   getApplianceList();
 };
 
@@ -46,7 +46,7 @@ function addAppliance() {
 
   if (addedAppliances.some((obj) => obj["details"] === id._id)) {
     showToast("Similar Appliance Already Added");
-    return;
+    return false;
   }
 
   addedAppliances.push(appliance);
@@ -80,7 +80,7 @@ function addAppliance() {
     applianceList.appendChild(applianceDiv);
   } else {
     showToast("Please Fill all Fields");
-    return;
+    return false;
   }
 }
 
@@ -89,12 +89,12 @@ function addRoom() {
 
   if (!roomName.length) {
     showToast("Please Add Room Name");
-    return;
+    return false;
   }
 
   if (!addedAppliances) {
     showToast("Appliance's List is Empty");
-    return;
+    return false;
   }
 
   let room = {
@@ -130,12 +130,12 @@ function addNewAppliance() {
 
   if (!applianceName.length) {
     showToast("Please Give a Appliance Name");
-    return;
+    return false;
   }
 
   if (!powerConsumption.length) {
     showToast("Please Give a Power Consumption ");
-    return;
+    return false;
   }
 
   let appliance = {
@@ -160,11 +160,13 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl);
 });
 
-function getRooms() {
-  axios.get("/getroomslist").then((response) => {
+function getRooms(filter) {
+  document.getElementById("roomsContainer").innerHTML = ""
+  axios.get(`/getroomslist/${filter}`).then((response) => {
     // console.log(response);
-    let roomsContainer = document.getElementById("roomsContainer");
-    response.data.forEach((room) => {
+    if(response) {
+      let roomsContainer = document.getElementById("roomsContainer");
+      response.data.forEach((room) => {
       let roomDiv = document.createElement("div");
       roomDiv.className = "col";
       roomDiv.innerHTML = `
@@ -208,7 +210,18 @@ function getRooms() {
                 </div>
               `;
       roomsContainer.appendChild(roomDiv);
-    });
+
+      // Add Room option in Search bar
+      let datalist = document.getElementById("roomsList")
+      let option = document.createElement('option');
+      option.innerHTML = room.roomName;
+      datalist.appendChild(option);
+
+      });
+    } else{
+      // getRooms('all')
+    }
+
   });
 }
 
@@ -222,4 +235,9 @@ function deleteRoom(roomId) {
       }, 3500);
     }
   });
+}
+
+function searchRoom(){
+  filter = document.getElementById("searchRoomInput").value;
+  getRooms(filter)
 }

@@ -27,6 +27,8 @@ router.get(
   authController.authRedirect
 );
 
+router.get("/weeklyreport", staticController.weeklyreportPage);
+
 router.get("/logout", authController.logout);
 
 router.post("/createroom", staticController.createRoom);
@@ -34,8 +36,10 @@ router.post("/addNewAppliance", staticController.createAppliance);
 
 router.get("/appliancelist", staticController.getApplianceList);
 
-router.get("/getroomslist", staticController.getRoomsList);
+router.get("/getroomslist/:filter", staticController.getRoomsList);
 
 router.post("/deleteroom", staticController.deleteRoom);
+
+router.get("/createWeeklyReport", staticController.createWeeklyReport);
 
 module.exports = router;

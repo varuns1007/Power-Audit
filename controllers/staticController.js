@@ -1,5 +1,6 @@
 const Room = require("../models/Room");
 const Appliance = require("../models/Appliance");
+const Data = require("../models/Data");
 
 module.exports.createRoom = async (req, res) => {
   let room = new Room({
@@ -52,14 +53,28 @@ module.exports.getApplianceList = async (req, res) => {
 };
 
 module.exports.getRoomsList = async (req, res) => {
-  await Room.find({})
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      res.send(result);
-      console.log(err);
+  console.log(req.params.filter);
+  if(req.params.filter === 'all'){
+    await Room.find({})
+      .then((result) => {
+        
+        res.send(result);
+      })
+      .catch((err) => {
+        res.send(result);
+        console.log(err);
+      });
+  } else{
+    await Room.find({roomName:req.params.filter})
+      .then((result) => {
+        console.log(result);
+        res.send(result);
+      })
+      .catch((err) => {
+        res.send(result);
+        console.log(err);
     });
+  }
 };
 
 module.exports.deleteRoom = async (req, res) => {
@@ -73,4 +88,60 @@ module.exports.deleteRoom = async (req, res) => {
       res.send(result);
       console.log(err);
     });
+};
+
+module.exports.weeklyreportPage = async (req, res) => {
+  await Data.find({})
+    .populate({
+      path: "rooms",
+      populate: {
+        path: "appliances",
+        populate: {
+          path: "details",
+        },
+      },
+    })
+    .then((result) => {
+      // console.log(result);
+      // Week
+      result.forEach((week) => {
+        // Rooms
+        week.rooms.forEach((room) => {
+          let totalPowerConsumption = 0;
+          // console.log("room", room);
+          // Appliances in Room
+          room.appliances.forEach((appliance) => {
+            totalPowerConsumption +=
+              appliance.details.powerConsumption *
+              appliance.count *
+              appliance.hoursUsed;
+          });
+          // console.log("totalPowerConsumption", totalPowerConsumption);
+          room.totalPowerConsumption = totalPowerConsumption;
+        });
+      });
+      // console.log(result);
+      res.render("week report", { data: result });
+      // res.send(result);
+    });
+};
+
+module.exports.createWeeklyReport = async (req, res) => {
+  let rooms = await Room.find({});
+  // console.log(rooms);
+  
+  let weeks = await Data.countDocuments();
+  // console.log("weeks", weeks);
+  
+  let weekData = new Data({
+    weekNo: weeks + 1,
+    rooms: rooms,
+  });
+  // console.log("data", weekData);
+  
+  weekData.save().then((result)=>{
+    console.log('Saved');
+  }).catch((err)=>{
+    console.log(err);
+  });
 };
