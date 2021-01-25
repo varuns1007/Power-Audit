@@ -13,7 +13,7 @@ module.exports.authRedirect = async (req,res)=>{
     if (err) {
       if (err.code === 11000) {
         req.session.user = userInfo;
-        res.send("logged in");
+        res.redirect("/homepage");
       } else {
         res.send(err);
       }
@@ -26,5 +26,5 @@ module.exports.authRedirect = async (req,res)=>{
 
 module.exports.logout = (req,res)=>{
   req.session.destroy()
-  res.redirect('/')
+  res.send('Login to Continue')
 }

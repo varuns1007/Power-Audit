@@ -134,7 +134,7 @@ module.exports.weeklyreportPage = async (req, res) => {
               appliance.hoursUsed;
           });
           // console.log("totalPowerConsumption", totalPowerConsumption);
-          room.totalPowerConsumption = totalPowerConsumption;
+          room.totalPowerConsumption = Math.round(totalPowerConsumption);;
         });
       });
       // console.log(result);
@@ -193,7 +193,7 @@ async function createWeeklyReport(){
   });
 }
 
-var j = schedule.scheduleJob({hour: 14, minute: 14, dayOfWeek: 1}, function(){
+var j = schedule.scheduleJob({hour: 14, minute: 38, dayOfWeek: 1}, function(){
   createWeeklyReport()
   console.log('Weekly Report Saved');
 });
