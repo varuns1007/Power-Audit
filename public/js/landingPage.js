@@ -160,6 +160,33 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl);
 });
 
+function showInfo(roomId){
+  console.log('heyy')
+  let singleRoom;
+  axios.get(`/getroom/${roomId}`)
+  .then((result)=>{
+    singleRoom = result.data;
+    console.log(singleRoom);
+    $('#infoModal').modal("show")
+  
+  let modalHeaderDiv = document.getElementById('modalHeader');
+  let modalHeader = document.createElement('h5');
+  modalHeader.className = 'modal-title';
+  modalHeader.innerHTML = singleRoom.roomName;
+  modalHeaderDiv.appendChild(modalHeader);
+  })
+
+  
+  // let modalBodyDiv = document.getElementById('modalBody');
+  // let modalBody = document.createElement('p');
+  // modalBody.innerHTML = 
+  // for(i=0;i<room.appliances.length;i++){
+  //   `${room.appliances.name}:${room.appliances.}`
+  // } 
+  
+
+}
+
 function getRooms() {
   axios.get("/getroomslist").then((response) => {
     // console.log(response);
@@ -167,6 +194,7 @@ function getRooms() {
     response.data.forEach((room) => {
       let roomDiv = document.createElement("div");
       roomDiv.className = "col";
+      roomDiv.id = room._id;
       roomDiv.innerHTML = `
                 <div
                   class="card border-success mb-3 h-100"
@@ -177,20 +205,14 @@ function getRooms() {
                   </div>
                   <div class="card-footer d-flex justify-content-between">
                     <div
-                      class="info-icon "
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
-                      title="Power usage of the Room"
-                      style="cursor: pointer"
-                    >
-                      <span class="material-icons"> info </span>
-                    </div>
-                    <div
                       class="edit-icon "
                       data-bs-toggle="tooltip"
+                      data-toggle="modal"
+                      data-target="#addNewRoomModal"
                       data-bs-placement="top"
                       title="Add Appliance"
                       style="cursor: pointer"
+                      
                     >
                       <span class="material-icons"> create </span>
                     </div>
@@ -198,6 +220,7 @@ function getRooms() {
                     class="edit-icon "
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
+                    
                     title="Delete Room"
                     style="cursor: pointer"
                     onclick=deleteRoom('${room._id}')
@@ -223,3 +246,4 @@ function deleteRoom(roomId) {
     }
   });
 }
+

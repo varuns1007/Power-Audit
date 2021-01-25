@@ -4,11 +4,23 @@ const passport = require("passport");
 require("./authenticate");
 const staticController = require("../controllers/staticController");
 const authController = require("../controllers/authController");
+const Room = require("../models/Room");
+const Appliance = require("../models/Appliance");
+const { static } = require("express");
 
-router.get("/", (req, res) => {
+router.get("/", async(req, res) => {
   // res.render("homepage");
   // console.log(req.session)
-  res.render("landingPage");
+  let rooms;
+  await Room.find({})
+    .then((result) => {
+      rooms = result;
+    })
+    .catch((err) => {
+      
+      console.log(err);
+    });
+  res.render("landingPage",{ rooms : rooms });
 });
 
 router.get(
@@ -22,7 +34,7 @@ router.get(
 );
 
 router.get(
-  "/homepage",
+  "/",
   passport.authenticate("google", { failureRedirect: "/" }),
   authController.authRedirect
 );
@@ -36,6 +48,10 @@ router.get("/appliancelist", staticController.getApplianceList);
 
 router.get("/getroomslist", staticController.getRoomsList);
 
+router.get("/getroom/:roomId",staticController.getRoom);
+
 router.post("/deleteroom", staticController.deleteRoom);
+
+router.get('/search',staticController.search);
 
 module.exports = router;

@@ -74,3 +74,32 @@ module.exports.deleteRoom = async (req, res) => {
       console.log(err);
     });
 };
+
+module.exports.getRoom = async(req,res) => {
+  let roomId = req.params.roomId;
+  await Room.findOne({_id: roomId}).populate({
+    path: 'appliances',
+    populate: {
+      path: 'details'
+    }
+  })
+    .then((result)=> {
+      // console.log(result)
+      res.send(result)
+    })
+    .catch((err)=> {
+      // console.log(err);
+      res.send(err)
+    })
+}
+
+module.exports.search = async (req,res) => {
+  let query = req.query.text;
+  await Room.find({ $text: { $search: query } })
+  .then((result)=>{
+    res.send(result);
+  })
+  .catch((err)=>{
+    res.send(err);
+  })
+}
