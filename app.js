@@ -16,7 +16,7 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(passport.initialize());
+
 
 //Session Setup
 app.use(require("express-session")({
@@ -34,12 +34,18 @@ app.use(function(req, res, next) {
 //Initialize DB
 initdb();
 
+// Initializes passport and passport sessions
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Initialize routes
 initRoutes(app);
 
+
+
 //Locals
 app.use(function(req, res, next) {
-    res.locals.user = req.session.user;
+    // res.locals.user = req.session.passport.user;
     next();
 });
 

@@ -26,5 +26,5 @@ module.exports.authRedirect = async (req,res)=>{
 
 module.exports.logout = (req,res)=>{
   req.session.destroy()
-  res.send('Login to Continue')
+  res.redirect('/')
 }

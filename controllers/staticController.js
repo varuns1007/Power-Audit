@@ -54,7 +54,7 @@ module.exports.getApplianceList = async (req, res) => {
 };
 
 module.exports.getRoomsList = async (req, res) => {
-  console.log(req.params.filter);
+  // console.log(req.params.filter);
   if(req.params.filter === 'all'){
     await Room.find({}).populate({
       path:'appliances',
@@ -109,6 +109,7 @@ module.exports.deleteAppliance = async (req, res) => {
 };
 
 module.exports.weeklyreportPage = async (req, res) => {
+
   await Data.find({}).populate({
     path: "rooms",
     populate: {

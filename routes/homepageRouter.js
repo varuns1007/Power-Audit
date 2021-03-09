@@ -9,15 +9,30 @@ const Appliance = require("../models/Appliance");
 const { static } = require("express");
 
 router.get(
-  "/",
-  passport.authenticate("google", { failureRedirect: "/" }),
-  authController.authRedirect
+  "/", (req, res) => {
+    res.render("landingPage")
+  }
 );
 
+router.get(
+  "/signin/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  function (req, res) {
+    res.locals.user = req.session.passport.user;
+    console.log(res.locals.user);
+    // Successful authentication, redirect home.
+    res.redirect("/homepage");
+  }
+);
 
 router.get("/homepage", async(req, res) => {
   // res.render("homepage");
-  // console.log(req.session)
+  console.log(req.session)
   let rooms;
   await Room.find({})
     .then((result) => {
@@ -27,21 +42,10 @@ router.get("/homepage", async(req, res) => {
       
       console.log(err);
     });
-  res.render("landingPage",{ rooms : rooms });
+  res.render("landingPage",{ rooms : rooms});
 });
 
-router.get(
-  "/signin/google",
-  passport.authenticate("google", {
-    scope: [
-      "https://www.googleapis.com/auth/userinfo.profile",
-      "https://www.googleapis.com/auth/userinfo.email",
-    ],
-  })
-);
-
-
-router.get("/weeklyreport", staticController.weeklyreportPage);
+router.get("/weeklyreport", isLoggedin, staticController.weeklyreportPage);
 
 router.get("/logout", authController.logout);
 
@@ -63,3 +67,11 @@ router.post("/deleteappliance", staticController.deleteAppliance);
 // router.get('/search',staticController.search);
 
 module.exports = router;
+
+function isLoggedin(req,res,next){
+  if (req.session.passport.user) {
+    next();
+  } else {
+    res.redirect("/");
+  }
+}
