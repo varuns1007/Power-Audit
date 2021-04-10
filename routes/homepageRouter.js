@@ -8,14 +8,13 @@ const Room = require("../models/Room");
 const Appliance = require("../models/Appliance");
 const { static } = require("express");
 
-router.get(
-  "/",
-  passport.authenticate("google", { failureRedirect: "/" }),
-  authController.authRedirect
-);
+// router.get(
+//   "/",
+//   passport.authenticate("google", { failureRedirect: "/" }),
+//   authController.authRedirect
+// );
 
-
-router.get("/homepage", async(req, res) => {
+router.get("/", async (req, res) => {
   // res.render("homepage");
   // console.log(req.session)
   let rooms;
@@ -24,10 +23,9 @@ router.get("/homepage", async(req, res) => {
       rooms = result;
     })
     .catch((err) => {
-      
       console.log(err);
     });
-  res.render("landingPage",{ rooms : rooms });
+  res.render("landingPage", { rooms: rooms });
 });
 
 router.get(
@@ -40,7 +38,6 @@ router.get(
   })
 );
 
-
 router.get("/weeklyreport", staticController.weeklyreportPage);
 
 router.get("/logout", authController.logout);
@@ -52,7 +49,7 @@ router.get("/appliancelist", staticController.getApplianceList);
 
 router.get("/getroomslist/:filter", staticController.getRoomsList);
 
-router.get("/getroom/:roomId",staticController.getRoom);
+router.get("/getroom/:roomId", staticController.getRoom);
 
 router.post("/deleteroom", staticController.deleteRoom);
 
