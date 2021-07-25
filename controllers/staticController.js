@@ -1,7 +1,7 @@
 const Room = require("../models/Room");
 const Appliance = require("../models/Appliance");
 const Data = require("../models/Data");
-var schedule = require('node-schedule');
+var schedule = require("node-schedule");
 
 module.exports.createRoom = async (req, res) => {
   let room = new Room({
@@ -55,13 +55,14 @@ module.exports.getApplianceList = async (req, res) => {
 
 module.exports.getRoomsList = async (req, res) => {
   console.log(req.params.filter);
-  if(req.params.filter === 'all'){
-    await Room.find({}).populate({
-      path:'appliances',
-      populate: {
-        path:'details'
-      }
-    })
+  if (req.params.filter === "all") {
+    await Room.find({})
+      .populate({
+        path: "appliances",
+        populate: {
+          path: "details",
+        },
+      })
       .then((result) => {
         res.send(result);
       })
@@ -69,8 +70,8 @@ module.exports.getRoomsList = async (req, res) => {
         res.send(result);
         console.log(err);
       });
-  } else{
-    await Room.find({roomName:req.params.filter})
+  } else {
+    await Room.find({ roomName: req.params.filter })
       .then((result) => {
         console.log(result);
         res.send(result);
@@ -78,7 +79,7 @@ module.exports.getRoomsList = async (req, res) => {
       .catch((err) => {
         res.send(result);
         console.log(err);
-    });
+      });
   }
 };
 
@@ -109,15 +110,16 @@ module.exports.deleteAppliance = async (req, res) => {
 };
 
 module.exports.weeklyreportPage = async (req, res) => {
-  await Data.find({}).populate({
-    path: "rooms",
-    populate: {
-      path: "appliances",
+  await Data.find({})
+    .populate({
+      path: "rooms",
       populate: {
-        path: "details",
+        path: "appliances",
+        populate: {
+          path: "details",
+        },
       },
-    },
-  })
+    })
     .then((result) => {
       console.log(result);
       // Week
@@ -128,13 +130,10 @@ module.exports.weeklyreportPage = async (req, res) => {
           // console.log("room", room);
           // Appliances in Room
           room.appliances.forEach((appliance) => {
-            totalPowerConsumption +=
-              appliance.details.powerConsumption *
-              appliance.count *
-              appliance.hoursUsed;
+            totalPowerConsumption += appliance.details.powerConsumption * appliance.count * appliance.hoursUsed;
           });
           // console.log("totalPowerConsumption", totalPowerConsumption);
-          room.totalPowerConsumption = Math.round(totalPowerConsumption);;
+          room.totalPowerConsumption = Math.round(totalPowerConsumption);
         });
       });
       // console.log(result);
@@ -143,57 +142,49 @@ module.exports.weeklyreportPage = async (req, res) => {
     });
 };
 
-
-module.exports.getRoom = async(req,res) => {
+module.exports.getRoom = async (req, res) => {
   let roomId = req.params.roomId;
-  await Room.findOne({_id: roomId}).populate({
-    path: 'appliances',
-    populate: {
-      path: 'details'
-    }
-  })
-    .then((result)=> {
+  await Room.findOne({ _id: roomId })
+    .populate({
+      path: "appliances",
+      populate: {
+        path: "details",
+      },
+    })
+    .then((result) => {
       // console.log(result)
-      res.send(result)
+      res.send(result);
     })
-    .catch((err)=> {
+    .catch((err) => {
       // console.log(err);
-      res.send(err)
-    })
-}
+      res.send(err);
+    });
+};
 
-// module.exports.search = async (req,res) => {
-//   let query = req.query.text;
-//   await Room.find({ $text: { $search: query } })
-//   .then((result)=>{
-//     res.send(result);
-//   })
-//   .catch((err)=>{
-//     res.send(err);
-//   })
-// }
-
-async function createWeeklyReport(){
+async function createWeeklyReport() {
   let rooms = await Room.find({});
   // console.log(rooms);
-  
+
   let weeks = await Data.countDocuments();
   // console.log("weeks", weeks);
-  
+
   let weekData = new Data({
     weekNo: weeks + 1,
     rooms: rooms,
   });
   // console.log("data", weekData);
-  
-  weekData.save().then((result)=>{
-    console.log('Saved');
-  }).catch((err)=>{
-    console.log(err);
-  });
+
+  weekData
+    .save()
+    .then((result) => {
+      console.log("Saved");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-var j = schedule.scheduleJob({hour: 14, minute: 38, dayOfWeek: 1}, function(){
-  createWeeklyReport()
-  console.log('Weekly Report Saved');
+var j = schedule.scheduleJob({ hour: 14, minute: 38, dayOfWeek: 1 }, function () {
+  createWeeklyReport();
+  console.log("Weekly Report Saved");
 });

@@ -8,13 +8,13 @@ const Room = require("../models/Room");
 const Appliance = require("../models/Appliance");
 const { static } = require("express");
 
-// router.get(
-//   "/",
-//   passport.authenticate("google", { failureRedirect: "/" }),
-//   authController.authRedirect
-// );
+router.get(
+  "/",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  authController.authRedirect
+);
 
-router.get("/", async (req, res) => {
+router.get("/homepage", async (req, res) => {
   // res.render("homepage");
   // console.log(req.session)
   let rooms;
